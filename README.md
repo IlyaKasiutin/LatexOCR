@@ -4,7 +4,7 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone git@github.com:IlyaKasiutin/LatexOCR.git
+git clone -b dev git@github.com:IlyaKasiutin/LatexOCR.git
 ```
 2. Установите tesseract-ocr:
 ```bash
