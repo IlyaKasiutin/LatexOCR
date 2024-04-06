@@ -1,0 +1,5 @@
+grpcio-reflection==1.62.1
+grpcio==1.62.1
+protobuf==5.26.0
+pytesseract==0.3.10
+torch==2.2.1
