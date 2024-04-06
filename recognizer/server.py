@@ -18,17 +18,17 @@ class RecognizerServicer(recognizer_pb2_grpc.RecognizerServicer):
     def RecognizeFormula(self, request, context):
         formula = self.latex_ocr.convert_formula(request[0])
         logging.log(logging.WARN, type(request.data))
-        return recognizer_pb2.RecognizedResult(result=f'formula')
+        return recognizer_pb2.RecognizedResult(result=formula)
 
     def RecognizeMixed(self, request, context):
         mixed = self.latex_ocr.convert_mixed(request[0])
         logging.log(logging.WARN, type(request.data[0]))
-        return recognizer_pb2.RecognizedResult(result=f'mixed')
+        return recognizer_pb2.RecognizedResult(result=mixed)
 
     def RecognizeText(self, request, context):
         text = self.latex_ocr.convert_text(request[0])
         logging.log(logging.WARN, type(request.data[0]))
-        return recognizer_pb2.RecognizedResult(result=f'text')
+        return recognizer_pb2.RecognizedResult(result=text)
 
 
 def serve():
