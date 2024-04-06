@@ -9,5 +9,4 @@ class TextRecognizerRus(ABSTextRecognizer):
         pass
 
     def recognize(self, path):
-        if isinstance(path, str):
-            return pytesseract.image_to_string(path, lang='rus')
+        return pytesseract.image_to_string(path, lang='rus')
