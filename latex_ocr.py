@@ -39,7 +39,8 @@ class LatexOCR:
                 line_number = element['line_number']
 
         # markdown = re.sub(r'\\tag{(?P<number>\d+)}', r'(\g<number>)', markdown)
-        markdown = re.sub(r'\tag{\d+.?\d.}', '', markdown)
+        markdown = re.sub(r'\\tag{\d+.?\d.}', '', markdown)
+
         return markdown
     
     def convert_text(self, data: bytes) -> str:
