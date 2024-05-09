@@ -30,7 +30,7 @@ class LatexOCR:
             elif element['type'] == 'embedding':
                 text = ' `$$' + text + '$$`'
             elif element['type'] == 'isolated':
-                text = '```KaTeX\n' + text + '\n```' 
+                text = '```KaTeX\n' + text + '\n```+\n' 
 
             if element['line_number'] == line_number:
                 markdown += text
@@ -44,7 +44,10 @@ class LatexOCR:
         return markdown
     
     def convert_text(self, data: bytes) -> str:
-        return self.convert(data)
+        bytes_stream = BytesIO(data)
+        image = Image.open(bytes_stream)
+        text = self.text_rec.recognize(image).strip()
+        return text
     
     def convert_formula(self, data: bytes) -> str:
         return self.convert(data)
