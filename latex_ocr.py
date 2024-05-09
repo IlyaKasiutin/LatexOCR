@@ -50,7 +50,11 @@ class LatexOCR:
         return text
     
     def convert_formula(self, data: bytes) -> str:
-        return self.convert(data)
+        bytes_stream = BytesIO(data)
+        image = Image.open(bytes_stream)
+        formula = self.p2t.recognize_formula(image)
+        text = '`$$' + formula + '$$`'
+        return text
     
     def convert_mixed(self, data: bytes) -> str:
         return self.convert(data)
