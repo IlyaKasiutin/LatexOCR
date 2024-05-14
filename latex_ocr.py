@@ -30,7 +30,7 @@ class LatexOCR:
             elif element['type'] == 'embedding':
                 text = ' `$$' + text + '$$`'
             elif element['type'] == 'isolated':
-                text = '```KaTeX\n' + text + '\n```+\n' 
+                text = '\n' + '```KaTeX\n' + text + '\n```+\n' 
 
             if element['line_number'] == line_number:
                 markdown += text
@@ -44,17 +44,19 @@ class LatexOCR:
         return markdown
     
     def convert_text(self, data: bytes) -> str:
-        bytes_stream = BytesIO(data)
-        image = Image.open(bytes_stream)
-        text = self.text_rec.recognize(image).strip()
-        return text
+        # bytes_stream = BytesIO(data)
+        # image = Image.open(bytes_stream)
+        # text = self.text_rec.recognize(image).strip()
+        # return text
+        return self.convert(data)
     
     def convert_formula(self, data: bytes) -> str:
-        bytes_stream = BytesIO(data)
-        image = Image.open(bytes_stream)
-        formula = self.p2t.recognize_formula(image)
-        text = '`$$' + formula + '$$`'
-        return text
+        # bytes_stream = BytesIO(data)
+        # image = Image.open(bytes_stream)
+        # formula = self.p2t.recognize_formula(image)
+        # text = '`$$' + formula + '$$`'
+        # return text
+        return self.convert(data)
     
     def convert_mixed(self, data: bytes) -> str:
         return self.convert(data)
