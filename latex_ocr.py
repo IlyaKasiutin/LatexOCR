@@ -30,7 +30,7 @@ class LatexOCR:
             elif element['type'] == 'embedding':
                 text = ' `$$' + text + '$$`'
             elif element['type'] == 'isolated':
-                text = '\n' + '```KaTeX\n' + text + '\n```+\n' 
+                text = '\n' + '```KaTeX\n' + text + '\n```' + '\n'
 
             if element['line_number'] == line_number:
                 markdown += text
