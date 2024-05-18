@@ -1,0 +1,30 @@
+
+on:
+  push:
+    branches: [master, dev]
+      
+jobs:
+  delivery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 83.166.238.20
+          username: ubuntu
+          port: 22 
+          key: ${{ secrets.SSH_KEY }}
+          source: "./*, !.git/*"
+          target: /home/ubuntu/smartlectures/recognizer
+          rm: true
+      - name: build 
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 83.166.238.20
+          username: ubuntu
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: cd smartlectures && docker compose up --build -d recognizer
+  
+
