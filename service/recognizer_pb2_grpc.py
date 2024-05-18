@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import recognizer_pb2 as recognizer_dot_recognizer__pb2
+import service.recognizer_pb2 as recognizer_dot_recognizer__pb2
 
 
 class RecognizerStub(object):
