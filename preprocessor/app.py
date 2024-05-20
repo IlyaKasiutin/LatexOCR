@@ -1,11 +1,7 @@
-import json
-
 from flask import Flask, session, request, jsonify
 import sys
 sys.path.append('../LatexOCR')
 from preprocessor import Preprocessor
-from io import BytesIO
-from PIL import Image
 import logging
 import numpy as np
 
@@ -46,7 +42,3 @@ def index():
                 
     return jsonify(image=new_image.tolist(), threshold=threshold)
 
-
-
-if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=7003)

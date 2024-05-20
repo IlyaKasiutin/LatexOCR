@@ -1,15 +1,11 @@
 import numpy as np
 import cv2
-import json
 from typing import Union, Tuple
 import scipy
 
 class Preprocessor():
     def __init__(self, denoising_strength: int=10):
         self.denoising_strength = denoising_strength
-
-        with open("config.json") as file:
-            self.config = json.load(file)
     
     def __high_contrast(self, img: np.ndarray, threshold: int=220) -> np.ndarray:
         return np.where(img >= threshold, 255, 0)
