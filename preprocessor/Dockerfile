@@ -1,6 +1,5 @@
 FROM python:3.11.9
 
-
 COPY ./requirements.txt ./
 COPY . /app/
 
