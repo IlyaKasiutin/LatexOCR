@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 import json
-from typing import Union
+from typing import Union, Tuple
 import scipy
 
 class Preprocessor():
@@ -68,12 +68,17 @@ class Preprocessor():
     def process_image_automatically(self, 
                                     img_path_source: Union[str, np.ndarray], 
                                     apply_fft: bool=False, 
-                                    img_path_dest: str=None, **argv) -> np.ndarray:
+                                    img_path_dest: str=None, **argv) -> Tuple[np.ndarray, int]:
         
         if isinstance(img_path_source, str):
             img = cv2.imread(img_path_source, 0)
         else:
-            img = img_path_source
+            if img_path_source.shape[-1] == 3:
+                img = img_path_source.astype('uint8')
+                img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+                img = np.array(img)
+            else:
+                img = img_path_source
         
         img = self.process_array(img, apply_fft=apply_fft)
         
@@ -94,7 +99,12 @@ class Preprocessor():
         if isinstance(img_path_source, str):
             img = cv2.imread(img_path_source, 0)
         else:
-            img = img_path_source
+            if img_path_source.shape[-1] == 3:
+                img = img_path_source.astype('uint8')
+                img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+                img = np.array(img)
+            else:
+                img = img_path_source
 
         img = self.process_array(img, apply_fft=apply_fft)
         processed_img = self.__high_contrast(img, contrast_threshold)
