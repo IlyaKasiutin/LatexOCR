@@ -1,11 +1,21 @@
-from flask import Flask, session, request, jsonify
+from flask import Flask, session, request, jsonify, send_file
 import sys
 sys.path.append('../LatexOCR')
 from preprocessor import Preprocessor
 import logging
 import numpy as np
+import io
 from io import BytesIO
 from PIL import Image
+from flask_cors import CORS
+import collections
+
+
+collections.Iterable = collections.abc.Iterable
+
+app = Flask(__name__)
+
+CORS(app)
 
 app = Flask(__name__)
 preprocessor = Preprocessor()
@@ -56,5 +66,13 @@ def index():
         else:
             logger.warning(f'process_image method')
             new_image = preprocessor.process_image(image, apply_fft=apply_fft, contrast_threshold=threshold)
+    
+
+    # img = Image.fromarray(new_image)
+    # img.save('temp_img.jpeg')
+
+    # new_image = new_image.tolist()
+
+
     
     return jsonify(image=str(new_image.tobytes()), threshold=threshold)
